@@ -6,6 +6,7 @@
   background-image: url(../../../images/heart__img.svg);
   transition: opacity 0.3s ease;
   cursor: pointer;
+  background-repeat: no-repeat;
 }
 
 .element__button:hover {
