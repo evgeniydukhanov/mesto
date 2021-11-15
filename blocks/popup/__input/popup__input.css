@@ -1,0 +1,19 @@
+.popup__input {
+  margin: 0 auto;
+  background-color: white;
+  max-width: 430px;
+  width: 100%;
+  min-height: 330px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  position: relative;
+  z-index: 5;
+}
+
+@media screen and (max-width:650px) {
+  .popup__input {
+    max-width: 282px;
+    min-height: 332px;
+  }
+}
