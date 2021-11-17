@@ -1,5 +1,5 @@
 .elements {
- /* border: 1px solid red;*/
+  /* border: 1px solid red;*/
   margin: 51px auto 0;
   max-width: 880px;
   width: 100%;
@@ -10,21 +10,18 @@
   row-gap: 20px;
 }
 
-
 @media screen and (max-width:930px) {
-  .elements{
-    max-width:600px;
+  .elements {
+    max-width: 600px;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 1fr);
   }
 }
 
-
 @media screen and (max-width: 650px) {
-  .elements{
-    max-width:282px;
-    grid-template-columns: repeat(1, 1fr);
+  .elements {
+    max-width: 282px;
+    grid-template-columns: repeat(1, 282px);
     margin: 0 auto;
   }
-
 }

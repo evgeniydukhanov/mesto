@@ -1,3 +1,4 @@
-.element__pic{
-  width:100%;
+.element__pic {
+  width: 100%;
+  display: block;
 }

@@ -6,14 +6,19 @@
   border-bottom: 1px solid #545454;
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:930px) {
   .header {
     max-width: 600px;
-    padding: 28px 0 38px 0;
   }
 }
 
-@media screen and(max-width: 600px) {
+@media screen and (max-width:768px) {
+  .header {
+    max-width: 600px;
+  }
+}
+
+@media screen and (max-width: 650px) {
   .header {
     max-width: 450px;
   }
