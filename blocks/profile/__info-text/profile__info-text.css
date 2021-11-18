@@ -5,6 +5,13 @@
   max-width: 294px;
 }
 
+@media screen and (max-width:420px) {
+  .profile__info-text {
+    max-width: 250px;
+    margin: 0 auto;
+  }
+}
+
 @media screen and (max-width: 360px) {
   .profile__info-text {
     margin: 0 0 0 46px;

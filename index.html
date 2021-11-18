@@ -11,11 +11,11 @@
 <body class="body">
   <div class="page">
     <header class="header">
-      <img class="header__logo" src="images/header__logo.png" alt="логотип">
+      <img class="header__logo" src="images/header__logo.svg" alt="логотип">
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="images/kusto.jpg" alt="Кусто">
+        <img class="profile__avatar" src="images/avatar.svg" alt="Кусто">
         <div class="profile__info">
           <div class="profile__info-text">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -70,15 +70,17 @@
         </div>
       </section>
       <div class="popup">
-        <form class="popup__input">
+        <div class="popup__container">
           <button class="popup__close-button" type="button"></button>
           <p class="popup__heading">Редактировать профиль</p>
-          <fieldset class="popup__fieldset">
-            <input class="popup__input-name" type="text" name="profileName" value="">
-            <input class="popup__input-workplace" type="text" name="workplace" value="">
-          </fieldset>
-          <button class="popup__save-button" type="submit">Сохранить</button>
-        </form>
+          <form class="popup__input" name="infoInput">
+            <input class="popup__input-text popup__input-text_name" type="text" name="profileName" value=""
+              placeholder="Имя">
+            <input class="popup__input-text popup__input-text_workplace" type="text" name="workplace" value=""
+              placeholder="Род занятий">
+            <button class="popup__save-button" type="submit">Сохранить</button>
+          </form>
+        </div>
       </div>
     </main>
     <footer class="footer">

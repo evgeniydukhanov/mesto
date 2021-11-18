@@ -1,6 +1,6 @@
 .popup__heading {
   text-align: left;
-  margin: 34px 64px 54px 36px;
+  margin: 34px 64px 0 36px;
   font-family: Inter, Arial, sans-serif;
   font-weight: 900;
   font-size: 24px;
@@ -11,6 +11,6 @@
   .popup__heading {
     font-size: 18px;
     line-height: 22px;
-    margin: 25px 22px 76px;
+    margin: 25px 22px 0;
   }
 }
