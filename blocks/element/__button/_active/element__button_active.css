@@ -1,16 +1,11 @@
-/*.element__button_active {
+.element__button_active {
   border: 0;
   width: 22px;
   height: 19px;
   background-color: transparent;
   background-image: url(../../../../images/like__active.svg);
-  transition: opacity 0.3s ease;
   cursor: pointer;
   background-repeat: no-repeat;
 }
 
-.element__button_active:hover {
-  opacity: 0.5;
-}
 
-*/
