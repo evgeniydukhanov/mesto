@@ -1,10 +1,12 @@
-const editButton = document.querySelector(".profile__edit-button")
+const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
 const popup = document.querySelector(".popup");
 const popupProfile = document.querySelector(".popup_type_info");
 const popupPlace = document.querySelector(".popup_type_place");
-const closeProfileButton = popupProfile.querySelector(".popup__close-button")
-const closePlaceButton = popupPlace.querySelector(".popup__close-button")
+const popupPicture = document.querySelector(".popup_type_pic");
+const closeProfileButton = popupProfile.querySelector(".popup__close-button");
+const closePlaceButton = popupPlace.querySelector(".popup__close-button");
+const closePictureButton = popupPicture.querySelector(".popup__close-button");
 const formElement = document.querySelector(".popup__input");
 const nameInput = formElement.querySelector(".popup__input-text_type_name");
 const jobInput = formElement.querySelector(".popup__input-text_type_workplace");
@@ -61,7 +63,10 @@ function getItem(item) {
   cardTitle.textContent = item.name;
   cardPic.src = item.link;
   cardPic.alt = item.name
-  likeBtn.addEventListener('click', like(likeBtn))
+
+  likeBtn.addEventListener('click', like(likeBtn));
+  cardPic.addEventListener('click', handlePopupImg);
+
   return newItem;
 }
 
@@ -91,6 +96,17 @@ function openPopupPlace() {
   inputImg.value = '';
 }
 
+function handlePopupImg(evt) {
+  const targetImg = evt.target;
+  const elementImg = targetImg.closest(".element");
+  const bigPicture = document.querySelector(".popup__big-picture")
+  const bigPictureCaption = document.querySelector(".popup__pic-caption");
+  bigPictureCaption.textContent = elementImg.textContent;
+  bigPicture.src = elementImg.querySelector(".element__pic").src;
+  bigPicture.alt = elementImg.textContent;
+  openPopup(popupPicture);
+}
+
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
 }
@@ -102,6 +118,10 @@ closeProfileButton.addEventListener('click', () => {
 closePlaceButton.addEventListener('click', () => {
   closePopup(popupPlace);
 });
+
+closePictureButton.addEventListener('click', () => {
+  closePopup(popupPicture);
+})
 
 function formSubmitHandler(evt) {
   evt.preventDefault();

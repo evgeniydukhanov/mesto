@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
+  <link rel="shortcut icon" href="./images/kusto.jpg" type="image/x-icon">
   <link rel="stylesheet" href="./pages/index.css">
   <script src="./scripts/index.js" defer></script>
 </head>
@@ -15,7 +16,6 @@
       <img class="header__logo" src="images/header__logo.svg" alt="логотип">
     </header>
     <main class="content">
-
 
       <section class="profile">
         <img class="profile__avatar" src="images/kusto.jpg" alt="Кусто">
@@ -29,50 +29,8 @@
         <button class="profile__add-button" type="button"></button>
       </section>
 
-
       <section class="elements">
-       <!-- <div class="element">
-          <img class="element__pic" src="images/building.png" alt="поле">
-          <div class="element__caption">
-            <p class="element__title">Карачаевск</p>
-            <button class="element__button" type="button"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__pic" src="images/field.png" alt="поле">
-          <div class="element__caption">
-            <p class="element__title">Гора Эльбрус</p>
-            <button class="element__button" type="button"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__pic" src="images/mountain.png" alt="поле">
-          <div class="element__caption">
-            <p class="element__title">Домбай</p>
-            <button class="element__button" type="button"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__pic" src="images/field.png" alt="поле">
-          <div class="element__caption">
-            <p class="element__title">Гора Эльбрус</p>
-            <button class="element__button" type="button"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__pic" src="images/mountain.png" alt="поле">
-          <div class="element__caption">
-            <p class="element__title">Карачаевск</p>
-            <button class="element__button" type="button"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__pic" src="images/building.png" alt="поле">
-          <div class="element__caption">
-            <p class="element__title">Карачаево-Черкессия</p>
-            <button class="element__button" type="button"></button>
-          </div>
-        </div> -->
+
       </section>
       <div class="popup popup_type_info">
         <div class="popup__container">
@@ -100,17 +58,22 @@
           </form>
         </div>
       </div>
-
+      <div class="popup popup_type_pic">
+        <div class="popup__pic-container">
+          <button class="popup__close-button" type="button"></button>
+          <img class="popup__big-picture" src="#" alt="#">
+          <p class="popup__pic-caption"></p>
+        </div>
+      </div>
 
     </main>
     <footer class="footer">
       <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
 
-
     <template class="template__card">
       <div class="element">
-        <img class="element__pic" src="images/building.png">
+        <img class="element__pic" src="" alt="">
         <button class="element__delete"></button>
         <div class="element__caption">
           <p class="element__title"></p>
@@ -118,7 +81,6 @@
         </div>
       </div>
     </template>
-
 
   </div>
 </body>
