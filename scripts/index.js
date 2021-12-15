@@ -17,6 +17,10 @@ const templateEl = document.querySelector(".template__card");
 const inputEl = document.querySelector(".popup__input-text_type_placeName");
 const inputImg = document.querySelector(".popup__input-text_type_placeLink");
 const formElementPlace = document.querySelector(".popup__input_place");
+const popupOverlay = popup.querySelector(".popup__overlay");
+const popupPlaceOverlay = popupPlace.querySelector(".popup__overlay");
+const popupPicOverlay = popupPicture.querySelector(".popup__overlay");
+const placeSubmitButton = popupPlace.querySelector('.popup__save-button');
 const initialCards = [
   {
     name: 'Архыз',
@@ -66,7 +70,7 @@ function render() {
       return getItem(item);
     });
 
- cardsContainer.append(...html);
+  cardsContainer.append(...html);
 }
 
 function handleDelete(evt) {
@@ -81,15 +85,20 @@ function like(likeBtn) {
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener("keyup", handleEsc)
 }
 
 function openPopupProfile() {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileWorkplace.textContent;
+  if (nameInput.value === "" && jobInput.value === "") {
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileWorkplace.textContent;
+}
   openPopup(popupProfile);
 }
 
 function openPopupPlace() {
+  placeSubmitButton.classList.add('popup__save-button_disabled');
+  placeSubmitButton.setAttribute('disabled','disabled');
   inputEl.value = '';
   inputImg.value = '';
   openPopup(popupPlace);
@@ -108,6 +117,7 @@ function handlePopupImg(evt) {
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keyup", handleEsc)
 }
 
 closeProfileButton.addEventListener('click', () => {
@@ -120,12 +130,12 @@ closePlaceButton.addEventListener('click', () => {
 
 closePictureButton.addEventListener('click', () => {
   closePopup(popupPicture);
-})
+});
 
 function submitHandlerform(evt) {
   evt.preventDefault();
-  profileName.textContent = nameInput.value
-  profileWorkplace.textContent = jobInput.value
+    profileName.textContent = nameInput.value
+    profileWorkplace.textContent = jobInput.value
   closePopup(popupProfile);
 }
 
@@ -138,14 +148,28 @@ function submitPlaceform(evt) {
   closePopup(popupPlace);
 }
 
+function handleEsc(event) {
+  if (event.key === "Escape" || event.key === "Esc") {
+    const activePopup = document.querySelector(".popup_opened");
+    closePopup(activePopup);
+   }
+}
+
+popupOverlay.addEventListener('click', () => {
+  closePopup(popupProfile);
+});
+
+popupPlaceOverlay.addEventListener('click', () => {
+  closePopup(popupPlace);
+});
+
+popupPicOverlay.addEventListener('click', () => {
+  closePopup(popupPicture);
+});
+
 formElementPlace.addEventListener('submit', submitPlaceform);
 formElement.addEventListener('submit', submitHandlerform);
 editButton.addEventListener('click', openPopupProfile);
 addButton.addEventListener('click', openPopupPlace);
 
-
-
 render();
-
-
-
