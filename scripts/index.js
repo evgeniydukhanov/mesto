@@ -21,6 +21,8 @@ const popupOverlay = popup.querySelector(".popup__overlay");
 const popupPlaceOverlay = popupPlace.querySelector(".popup__overlay");
 const popupPicOverlay = popupPicture.querySelector(".popup__overlay");
 const placeSubmitButton = popupPlace.querySelector('.popup__save-button');
+const bigPicture = popupPicture.querySelector(".popup__big-picture")
+const bigPictureCaption = popupPicture.querySelector(".popup__pic-caption");
 const initialCards = [
   {
     name: 'Архыз',
@@ -99,16 +101,14 @@ function openPopupProfile() {
 function openPopupPlace() {
   placeSubmitButton.classList.add('popup__save-button_disabled');
   placeSubmitButton.setAttribute('disabled','disabled');
-  inputEl.value = '';
-  inputImg.value = '';
   openPopup(popupPlace);
 }
+
 
 function handlePopupImg(evt) {
   const targetImg = evt.target;
   const elementImg = targetImg.closest(".element");
-  const bigPicture = document.querySelector(".popup__big-picture")
-  const bigPictureCaption = document.querySelector(".popup__pic-caption");
+
   bigPictureCaption.textContent = elementImg.textContent;
   bigPicture.src = elementImg.querySelector(".element__pic").src;
   bigPicture.alt = elementImg.textContent;
@@ -119,18 +119,6 @@ function closePopup(popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener("keyup", handleEsc)
 }
-
-closeProfileButton.addEventListener('click', () => {
-  closePopup(popupProfile);
-});
-
-closePlaceButton.addEventListener('click', () => {
-  closePopup(popupPlace);
-});
-
-closePictureButton.addEventListener('click', () => {
-  closePopup(popupPicture);
-});
 
 function submitHandlerform(evt) {
   evt.preventDefault();
@@ -145,6 +133,8 @@ function submitPlaceform(evt) {
   const newCardLink = inputImg.value
   const newCard = getItem({ name: newCardName, link: newCardLink, alt: newCardName });
   cardsContainer.prepend(newCard);
+  inputEl.value ="";
+  inputImg.value ="";
   closePopup(popupPlace);
 }
 
@@ -167,9 +157,22 @@ popupPicOverlay.addEventListener('click', () => {
   closePopup(popupPicture);
 });
 
+closeProfileButton.addEventListener('click', () => {
+  closePopup(popupProfile);
+});
+
+closePlaceButton.addEventListener('click', () => {
+  closePopup(popupPlace);
+});
+
+closePictureButton.addEventListener('click', () => {
+  closePopup(popupPicture);
+});
+
 formElementPlace.addEventListener('submit', submitPlaceform);
 formElement.addEventListener('submit', submitHandlerform);
 editButton.addEventListener('click', openPopupProfile);
 addButton.addEventListener('click', openPopupPlace);
+
 
 render();
