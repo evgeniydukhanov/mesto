@@ -7,8 +7,7 @@
   <title>Mesto</title>
   <link rel="shortcut icon" href="./images/kusto.jpg" type="image/x-icon">
   <link rel="stylesheet" href="./pages/index.css">
-  <script src="./scripts/validate.js" defer></script>
-  <script src="./scripts/index.js" defer></script>
+
 </head>
 
 <body class="body">
@@ -43,28 +42,28 @@
         <button class="popup__close-button" type="button"></button>
         <p class="popup__heading">Редактировать профиль</p>
         <form class="popup__input" name="infoInput">
-          <input id="input-name" class="popup__input-text popup__input-text_type_name" type="text" name="profileName" value=""
-            placeholder="Имя" minlength="2" maxlength="40" required>
+          <input id="input-name" class="popup__input-text popup__input-text_type_name" type="text" name="profileName"
+            value="" placeholder="Имя" minlength="2" maxlength="40" required>
           <span id='input-name-error' class="error">Вы пропустили это поле</span>
-          <input id="input-workplace" class="popup__input-text popup__input-text_type_workplace" type="text" name="workplace" value=""
-            placeholder="Род занятий" minlength="2" maxlength="200" required>
+          <input id="input-workplace" class="popup__input-text popup__input-text_type_workplace" type="text"
+            name="workplace" value="" placeholder="Род занятий" minlength="2" maxlength="200" required>
           <span id='input-workplace-error' class="error">Вы пропустили это поле</span>
           <button class="popup__save-button" type="submit">Сохранить</button>
         </form>
       </div>
-  </div>
+    </div>
     <div class="popup popup_type_place">
-     <div class="popup__overlay"></div>
+      <div class="popup__overlay"></div>
       <div class="popup__container">
         <button class="popup__close-button" type="button"></button>
         <p class="popup__heading">Новое место</p>
         <form class="popup__input popup__input_place" name="placeInput">
-          <input id="name-card" class="popup__input-text popup__input-text_type_placeName" type="text" name="placeName" value=""
-            placeholder="Название" minlength="2" maxlength="30" required>
-            <span id='name-card-error' class="error">Вы пропустили это поле</span>
-          <input id="name-link" class="popup__input-text popup__input-text_type_placeLink" type="url" name="placeLink" value=""
-            placeholder="Ссылка на картинку" required>
-            <span id='name-link-error' class="error">Введите адрес сайта</span>
+          <input id="name-card" class="popup__input-text popup__input-text_type_placeName" type="text" name="placeName"
+            value="" placeholder="Название" minlength="2" maxlength="30" required>
+          <span id='name-card-error' class="error">Вы пропустили это поле</span>
+          <input id="name-link" class="popup__input-text popup__input-text_type_placeLink" type="url" name="placeLink"
+            value="" placeholder="Ссылка на картинку" required>
+          <span id='name-link-error' class="error">Введите адрес сайта</span>
           <button class="popup__save-button popup__add-button" type="submit">Создать</button>
         </form>
       </div>
@@ -77,7 +76,7 @@
         <p class="popup__pic-caption"></p>
       </div>
     </div>
-    <template class="template__card">
+    <template id="cardTemplate" class="template__card">
       <div class="element">
         <img class="element__pic" src="#" alt="">
         <button class="element__delete"></button>
@@ -88,6 +87,7 @@
       </div>
     </template>
   </div>
+  <script type="module" src="./scripts/index.js"></script>
 </body>
 
 </html>
