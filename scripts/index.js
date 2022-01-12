@@ -114,10 +114,10 @@ function openPopupPlace() {
   openPopup(popupPlace);
 }
 
-function handleCardClick(name, link) {
-  const bigPicture = popupPicture.querySelector(".popup__big-picture")
-  const bigPictureCaption = popupPicture.querySelector(".popup__pic-caption");
-}
+// function handleCardClick(name, link) {
+//   const bigPicture = popupPicture.querySelector(".popup__big-picture")
+//   const bigPictureCaption = popupPicture.querySelector(".popup__pic-caption");
+// }
 
 // function handlePopupImg(evt) {
 //   const targetImg = evt.target;
