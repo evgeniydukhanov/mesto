@@ -151,6 +151,8 @@ function handleProfileFormSubmit(evt) {
 //   inputImg.value = "";
 //   closePopup(popupPlace);
 // }
+
+
 function handlePlaceFormSubmit(evt) {
   evt.preventDefault();
   const inputs = {
@@ -172,29 +174,44 @@ function handleEsc(event) {
   }
 }
 
-popupProfileOverlay.addEventListener('click', () => {
-  closePopup(popupProfile);
-});
+const popups = document.querySelectorAll('.popup')
 
-popupPlaceOverlay.addEventListener('click', () => {
-  closePopup(popupPlace);
+popups.forEach((popup) => {
+    popup.addEventListener('click', (evt) => {
+        if (evt.target.classList.contains('popup_opened')) {
+            closePopup(popup);
+        }
+        if (evt.target.classList.contains('popup__close-button')) {
+          closePopup(popup);
+        }
+        if (evt.target.classList.contains('popup__overlay')){
+          closePopup(popup);
+        }
+    })
 });
+// popupProfileOverlay.addEventListener('click', () => {
+//   closePopup(popupProfile);
+// });
 
-popupPicOverlay.addEventListener('click', () => {
-  closePopup(popupPicture);
-});
+// popupPlaceOverlay.addEventListener('click', () => {
+//   closePopup(popupPlace);
+// });
 
-closeProfileButton.addEventListener('click', () => {
-  closePopup(popupProfile);
-});
+// popupPicOverlay.addEventListener('click', () => {
+//   closePopup(popupPicture);
+// });
 
-closePlaceButton.addEventListener('click', () => {
-  closePopup(popupPlace);
-});
+// closeProfileButton.addEventListener('click', () => {
+//   closePopup(popupProfile);
+// });
 
-closePictureButton.addEventListener('click', () => {
-  closePopup(popupPicture);
-});
+// closePlaceButton.addEventListener('click', () => {
+//   closePopup(popupPlace);
+// });
+
+// closePictureButton.addEventListener('click', () => {
+//   closePopup(popupPicture);
+// });
 
 placeForm.addEventListener('submit', handlePlaceFormSubmit);
 profileForm.addEventListener('submit', handleProfileFormSubmit);
