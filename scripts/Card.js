@@ -35,8 +35,8 @@ export default class Card {
     this._openPopupHandler(popupPicture);
   }
   _setEventListeners() {
-    this._imgEl = this._element.querySelector(".element__pic");
-    this._imgEl.addEventListener('click', this._handlePopupPictureClick);
+    // this._imgEl = this._element.querySelector(".element__pic");
+    this._elemImg.addEventListener('click', this._handlePopupPictureClick);
 
     this._deleteBtn = this._element.querySelector(".element__delete");
     this._deleteBtn.addEventListener('click', this._handleDelete);
