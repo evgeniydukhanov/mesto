@@ -16,7 +16,6 @@ export default class Card {
       .querySelector(".element")
       .cloneNode(true);
 
-
     return cardElement;
   }
   generateCard() {
@@ -35,7 +34,6 @@ export default class Card {
     this._openPopupHandler(popupPicture);
   }
   _setEventListeners() {
-    // this._imgEl = this._element.querySelector(".element__pic");
     this._elemImg.addEventListener('click', this._handlePopupPictureClick);
 
     this._deleteBtn = this._element.querySelector(".element__delete");
@@ -48,7 +46,6 @@ export default class Card {
     this._element.remove();
   }
   _handleLike = () => {
-    // const cardLikeBtn = this._element.querySelector(".element__button");
     this._cardLikeBtn.classList.toggle("element__button_active");
   }
 }
