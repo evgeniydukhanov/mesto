@@ -2,8 +2,9 @@ import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import Section from "./Section.js";
 import PopupWithImage from "./PopupWithImage.js";
+import PopupWithForm from "./PopupWithForm.js";
 
-const popups = document.querySelectorAll('.popup')
+// const popups = document.querySelectorAll('.popup')
 const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
 const popupProfile = document.querySelector(".popup_type_info");
@@ -52,24 +53,34 @@ const config = {
   errorClass: 'error_visible'
 };
 
-function openPopup(popup) {
-  popup.classList.add("popup_opened");
-  document.addEventListener("keyup", handleEsc)
+
+const popupPlaceClass = new PopupWithForm('.popup_type_place', handlePlaceFormSubmit);
+const popupProfileClass = new PopupWithForm('.popup_type_info', handleProfileFormSubmit)
+
+function openPopupPlace() {
+  popupPlaceClass.open();
+  placeFormValidation.enableValidation();
 }
+
+
+// function openPopup(popup) {
+//   popup.classList.add("popup_opened");
+//   document.addEventListener("keyup", handleEsc)
+// }
 
 function openPopupProfile() {
   if (nameInput.value === "" && jobInput.value === "") {
     nameInput.value = profileName.textContent;
     jobInput.value = profileWorkplace.textContent;
   }
-  openPopup(popupProfile);
+  popupProfileClass.open();
   profileFormValidation.enableValidation();
 }
 
-function openPopupPlace() {
-  openPopup(popupPlace);
-  placeFormValidation.enableValidation();
-}
+// function openPopupPlace() {
+//   openPopup(popupPlace);
+//   placeFormValidation.enableValidation();
+// }
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
@@ -77,14 +88,14 @@ function closePopup(popup) {
 }
 
 function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
+  // evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileWorkplace.textContent = jobInput.value;
-  closePopup(popupProfile);
+  popupProfileClass.close();
 }
 
-function handlePlaceFormSubmit(evt) {
-  evt.preventDefault();
+function handlePlaceFormSubmit() {
+  // evt.preventDefault();
   const inputs = {
     name: inputEl.value,
     link: inputImg.value,
@@ -95,7 +106,7 @@ function handlePlaceFormSubmit(evt) {
   inputEl.value = "";
   inputImg.value = "";
   placeFormValidation.setButtonDisabled();
-  closePopup(popupPlace);
+  popupPlaceClass.close();
 }
 
 function handleEsc(event) {
@@ -116,8 +127,8 @@ function handleEsc(event) {
 //   })
 // });
 
-placeForm.addEventListener('submit', handlePlaceFormSubmit);
-profileForm.addEventListener('submit', handleProfileFormSubmit);
+// placeForm.addEventListener('submit', handlePlaceFormSubmit);
+// profileForm.addEventListener('submit', handleProfileFormSubmit);
 editButton.addEventListener('click', openPopupProfile);
 addButton.addEventListener('click', openPopupPlace);
 
@@ -131,7 +142,6 @@ function handleCardClick(name, link) {
   const popupWithImage = new PopupWithImage(".popup_type_pic");
   popupWithImage.open({ name, link });
 }
-
 
 const placeFormValidation =
   new FormValidator(config, placeForm);
@@ -150,4 +160,3 @@ const cards = new Section({
 },
   cardsContainer);
 cards.renderItems();
-
