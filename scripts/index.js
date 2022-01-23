@@ -1,5 +1,7 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
+import Section from "./Section.js";
+import PopupWithImage from "./PopupWithImage.js";
 
 const popups = document.querySelectorAll('.popup')
 const editButton = document.querySelector(".profile__edit-button");
@@ -61,10 +63,12 @@ function openPopupProfile() {
     jobInput.value = profileWorkplace.textContent;
   }
   openPopup(popupProfile);
+  profileFormValidation.enableValidation();
 }
 
 function openPopupPlace() {
   openPopup(popupPlace);
+  placeFormValidation.enableValidation();
 }
 
 function closePopup(popup) {
@@ -101,16 +105,16 @@ function handleEsc(event) {
   }
 }
 
-popups.forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('popup__close-button')) {
-      closePopup(popup);
-    }
-    if (evt.target.classList.contains('popup__overlay')) {
-      closePopup(popup);
-    }
-  })
-});
+// popups.forEach((popup) => {
+//   popup.addEventListener('click', (evt) => {
+//     if (evt.target.classList.contains('popup__close-button')) {
+//       closePopup(popup);
+//     }
+//     if (evt.target.classList.contains('popup__overlay')) {
+//       closePopup(popup);
+//     }
+//   })
+// });
 
 placeForm.addEventListener('submit', handlePlaceFormSubmit);
 profileForm.addEventListener('submit', handleProfileFormSubmit);
@@ -118,20 +122,32 @@ editButton.addEventListener('click', openPopupProfile);
 addButton.addEventListener('click', openPopupPlace);
 
 function createCard(data) {
-  const card = new Card(data, '#cardTemplate', openPopup);
+  const card = new Card(data, '#cardTemplate', handleCardClick);
   const cardElement = card.generateCard();
   return cardElement;
 }
 
-initialCards.forEach((item) => {
-  const card = createCard(item);
-  cardsContainer.append(card);
-});
+function handleCardClick(name, link) {
+  const popupWithImage = new PopupWithImage(".popup_type_pic");
+  popupWithImage.open({ name, link });
+}
+
 
 const placeFormValidation =
   new FormValidator(config, placeForm);
-placeFormValidation.enableValidation();
+// placeFormValidation.enableValidation();
 
 const profileFormValidation =
   new FormValidator(config, profileForm);
-profileFormValidation.enableValidation();
+// profileFormValidation.enableValidation();
+
+const cards = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = createCard(item);
+    cards.addItem(card);
+  },
+},
+  cardsContainer);
+cards.renderItems();
+
