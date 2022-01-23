@@ -82,10 +82,10 @@ function openPopupProfile() {
 //   placeFormValidation.enableValidation();
 // }
 
-function closePopup(popup) {
-  popup.classList.remove("popup_opened");
-  document.removeEventListener("keyup", handleEsc)
-}
+// function closePopup(popup) {
+//   popup.classList.remove("popup_opened");
+//   document.removeEventListener("keyup", handleEsc)
+// }
 
 function handleProfileFormSubmit(evt) {
   // evt.preventDefault();
@@ -109,12 +109,12 @@ function handlePlaceFormSubmit() {
   popupPlaceClass.close();
 }
 
-function handleEsc(event) {
-  if (event.key === "Escape" || event.key === "Esc") {
-    const activePopup = document.querySelector(".popup_opened");
-    closePopup(activePopup);
-  }
-}
+// function handleEsc(event) {
+//   if (event.key === "Escape" || event.key === "Esc") {
+//     const activePopup = document.querySelector(".popup_opened");
+//     closePopup(activePopup);
+//   }
+// }
 
 // popups.forEach((popup) => {
 //   popup.addEventListener('click', (evt) => {
@@ -143,13 +143,9 @@ function handleCardClick(name, link) {
   popupWithImage.open({ name, link });
 }
 
-const placeFormValidation =
-  new FormValidator(config, placeForm);
-// placeFormValidation.enableValidation();
+const placeFormValidation = new FormValidator(config, placeForm);
 
-const profileFormValidation =
-  new FormValidator(config, profileForm);
-// profileFormValidation.enableValidation();
+const profileFormValidation = new FormValidator(config, profileForm);
 
 const cards = new Section({
   items: initialCards,
