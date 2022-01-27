@@ -53,7 +53,6 @@ const config = {
   errorClass: 'error_visible'
 };
 
-
 const popupPlaceClass = new PopupWithForm('.popup_type_place', handlePlaceFormSubmit);
 const popupProfileClass = new PopupWithForm('.popup_type_info', handleProfileFormSubmit)
 
@@ -62,11 +61,6 @@ function openPopupPlace() {
   placeFormValidation.enableValidation();
 }
 
-
-// function openPopup(popup) {
-//   popup.classList.add("popup_opened");
-//   document.addEventListener("keyup", handleEsc)
-// }
 
 function openPopupProfile() {
   if (nameInput.value === "" && jobInput.value === "") {
@@ -77,17 +71,7 @@ function openPopupProfile() {
   profileFormValidation.enableValidation();
 }
 
-// function openPopupPlace() {
-//   openPopup(popupPlace);
-//   placeFormValidation.enableValidation();
-// }
-
-// function closePopup(popup) {
-//   popup.classList.remove("popup_opened");
-//   document.removeEventListener("keyup", handleEsc)
-// }
-
-function handleProfileFormSubmit(evt) {
+function handleProfileFormSubmit() {
   // evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileWorkplace.textContent = jobInput.value;
@@ -109,26 +93,6 @@ function handlePlaceFormSubmit() {
   popupPlaceClass.close();
 }
 
-// function handleEsc(event) {
-//   if (event.key === "Escape" || event.key === "Esc") {
-//     const activePopup = document.querySelector(".popup_opened");
-//     closePopup(activePopup);
-//   }
-// }
-
-// popups.forEach((popup) => {
-//   popup.addEventListener('click', (evt) => {
-//     if (evt.target.classList.contains('popup__close-button')) {
-//       closePopup(popup);
-//     }
-//     if (evt.target.classList.contains('popup__overlay')) {
-//       closePopup(popup);
-//     }
-//   })
-// });
-
-// placeForm.addEventListener('submit', handlePlaceFormSubmit);
-// profileForm.addEventListener('submit', handleProfileFormSubmit);
 editButton.addEventListener('click', openPopupProfile);
 addButton.addEventListener('click', openPopupPlace);
 
@@ -156,3 +120,45 @@ const cards = new Section({
 },
   cardsContainer);
 cards.renderItems();
+
+
+
+
+
+
+
+
+
+// function openPopup(popup) {
+//   popup.classList.add("popup_opened");
+//   document.addEventListener("keyup", handleEsc)
+// }
+
+// function openPopupPlace() {
+//   openPopup(popupPlace);
+//   placeFormValidation.enableValidation();
+// }
+
+// function closePopup(popup) {
+//   popup.classList.remove("popup_opened");
+//   document.removeEventListener("keyup", handleEsc)
+// }
+
+
+// function handleEsc(event) {
+//   if (event.key === "Escape" || event.key === "Esc") {
+//     const activePopup = document.querySelector(".popup_opened");
+//     closePopup(activePopup);
+//   }
+// }
+
+// popups.forEach((popup) => {
+//   popup.addEventListener('click', (evt) => {
+//     if (evt.target.classList.contains('popup__close-button')) {
+//       closePopup(popup);
+//     }
+//     if (evt.target.classList.contains('popup__overlay')) {
+//       closePopup(popup);
+//     }
+//   })
+// });
