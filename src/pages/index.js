@@ -1,3 +1,4 @@
+import './index.css';
 import {initialCards} from "../utils/constants.js";
 import { config } from "../utils/constants.js";
 import Card from "../components/Card.js";
@@ -6,6 +7,7 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+
 
 const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
@@ -87,3 +89,4 @@ const cards = new Section({
 },
   cardsContainer);
 cards.renderItems();
+
