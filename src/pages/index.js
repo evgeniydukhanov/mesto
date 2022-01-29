@@ -1,5 +1,5 @@
 import './index.css';
-import {initialCards} from "../utils/constants.js";
+import { initialCards } from "../utils/constants.js";
 import { config } from "../utils/constants.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -16,16 +16,11 @@ const popupPlace = document.querySelector(".popup_type_place");
 const profileForm = popupProfile.querySelector(".popup__input");
 const nameInput = profileForm.querySelector(".popup__input-text_type_name");
 const jobInput = profileForm.querySelector(".popup__input-text_type_workplace");
-const profileName = document.querySelector(".profile__name");
-const profileWorkplace = document.querySelector(".profile__workplace");
-const cardsContainer = document.querySelector(".elements");
 const placeForm = popupPlace.querySelector(".popup__input_place");
-const inputEl = placeForm.querySelector(".popup__input-text_type_placeName");
-const inputImg = placeForm.querySelector(".popup__input-text_type_placeLink");
 
 function openPopupPlace() {
   popupPlaceClass.open();
-  placeFormValidation.enableValidation();
+  placeFormValidation.setButtonDisabled();
 }
 
 function openPopupProfile() {
@@ -35,29 +30,6 @@ function openPopupProfile() {
   }
 
   popupProfileClass.open();
-  profileFormValidation.enableValidation();
-}
-
-function handleProfileFormSubmit() {
-  userData.setUserInfo({
-    name: nameInput.value,
-    workplace: jobInput.value
-  });
-  popupProfileClass.close();
-}
-
-function handlePlaceFormSubmit() {
-  const inputs = {
-    name: inputEl.value,
-    link: inputImg.value,
-  };
-
-  const newCard = createCard(inputs);
-  cardsContainer.prepend(newCard);
-  inputEl.value = "";
-  inputImg.value = "";
-  placeFormValidation.setButtonDisabled();
-  popupPlaceClass.close();
 }
 
 editButton.addEventListener('click', openPopupProfile);
@@ -70,15 +42,30 @@ function createCard(data) {
 }
 
 function handleCardClick(name, link) {
-  const popupWithImage = new PopupWithImage(".popup_type_pic");
   popupWithImage.open({ name, link });
+  popupWithImage.setEventListeners();
 }
 
-const userData = new UserInfo({ nameSelector: profileName, workplaceSelector: profileWorkplace })
-const popupPlaceClass = new PopupWithForm('.popup_type_place', handlePlaceFormSubmit);
-const popupProfileClass = new PopupWithForm('.popup_type_info', handleProfileFormSubmit)
+const popupWithImage = new PopupWithImage(".popup_type_pic");
+const userData = new UserInfo({ nameSelector: ".profile__name", workplaceSelector: ".profile__workplace" })
 const placeFormValidation = new FormValidator(config, placeForm);
 const profileFormValidation = new FormValidator(config, profileForm);
+const popupProfileClass = new PopupWithForm({
+  popupSelector: '.popup_type_info',
+  handleFormSubmit: ({ name, workplace }) => {
+    userData.setUserInfo({ name, workplace });
+    popupProfileClass.close();
+  }
+});
+
+const popupPlaceClass = new PopupWithForm({
+  popupSelector: '.popup_type_place',
+  handleFormSubmit: ({ placeName, placeLink }) => {
+    const newCard = createCard({ name: placeName, link: placeLink });
+    cards.prependItem(newCard);
+    popupPlaceClass.close();
+  }
+});
 
 const cards = new Section({
   items: initialCards,
@@ -87,6 +74,11 @@ const cards = new Section({
     cards.addItem(card);
   },
 },
-  cardsContainer);
+  ".elements");
 cards.renderItems();
 
+placeFormValidation.enableValidation();
+profileFormValidation.enableValidation();
+
+popupProfileClass.setEventListeners();
+popupPlaceClass.setEventListeners();
