@@ -43,7 +43,6 @@ function createCard(data) {
 
 function handleCardClick(name, link) {
   popupWithImage.open({ name, link });
-  popupWithImage.setEventListeners();
 }
 
 const popupWithImage = new PopupWithImage(".popup_type_pic");
@@ -82,3 +81,4 @@ profileFormValidation.enableValidation();
 
 popupProfileClass.setEventListeners();
 popupPlaceClass.setEventListeners();
+popupWithImage.setEventListeners();
