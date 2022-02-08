@@ -7,6 +7,7 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
 
 
 const editButton = document.querySelector(".profile__edit-button");
@@ -61,20 +62,23 @@ const popupPlaceClass = new PopupWithForm({
   popupSelector: '.popup_type_place',
   handleFormSubmit: ({ placeName, placeLink }) => {
     const newCard = createCard({ name: placeName, link: placeLink });
-    cards.prependItem(newCard);
+    cardList.prependItem(newCard);
     popupPlaceClass.close();
   }
 });
 
-const cards = new Section({
-  items: initialCards,
+const cardList = new Section({
   renderer: (item) => {
-    const card = createCard(item);
-    cards.addItem(card);
+    return createCard(item)
   },
 },
   ".elements");
-cards.renderItems();
+
+const api = new Api({
+  address: 'https://mesto.nomoreparties.co/v1/cohort-35/',
+  token: '529554a2-647f-490d-a484-0555ee80cbf1'
+})
+
 
 placeFormValidation.enableValidation();
 profileFormValidation.enableValidation();
@@ -82,3 +86,9 @@ profileFormValidation.enableValidation();
 popupProfileClass.setEventListeners();
 popupPlaceClass.setEventListeners();
 popupWithImage.setEventListeners();
+
+api.getCards()
+  .then(cards => {
+    cardList.renderItems(cards);
+  })
+  .catch(err => console.log(err))
