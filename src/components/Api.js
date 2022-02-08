@@ -16,5 +16,12 @@ export default class Api {
       }
     }).then(this._handleResponse)
   }
+  getUserInfo() {
+    return fetch(`${this._address}/users/me`, {
+      headers: {
+        authorization: this._token
+      }
+    }).then(this._handleResponse)
+  }
 }
 

@@ -47,13 +47,13 @@ function handleCardClick(name, link) {
 }
 
 const popupWithImage = new PopupWithImage(".popup_type_pic");
-const userData = new UserInfo({ nameSelector: ".profile__name", workplaceSelector: ".profile__workplace" })
+const userData = new UserInfo({ nameSelector: ".profile__name", workplaceSelector: ".profile__workplace", avatarSelector: ".profile__avatar" })
 const placeFormValidation = new FormValidator(config, placeForm);
 const profileFormValidation = new FormValidator(config, profileForm);
 const popupProfileClass = new PopupWithForm({
   popupSelector: '.popup_type_info',
-  handleFormSubmit: ({ name, workplace }) => {
-    userData.setUserInfo({ name, workplace });
+  handleFormSubmit: ({ name, workplace, avatar }) => {
+    userData.setUserInfo({ name, workplace, avatar });
     popupProfileClass.close();
   }
 });
@@ -91,4 +91,6 @@ api.getCards()
   .then(cards => {
     cardList.renderItems(cards);
   })
+  .then(api.getUserInfo())
   .catch(err => console.log(err))
+
