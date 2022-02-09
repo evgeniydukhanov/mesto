@@ -15,7 +15,7 @@
     <main class="content">
 
       <section class="profile">
-        <img class="profile__avatar" src="<%=require('./images/kusto.jpg')%>" alt="Кусто">
+        <img class="profile__avatar" alt="аватар">
         <div class="profile__info">
           <div class="profile__info-text">
             <h1 class="profile__name"></h1>
@@ -43,7 +43,7 @@
             value="" placeholder="Имя" minlength="2" maxlength="40" required>
           <span id='input-name-error' class="error">Вы пропустили это поле</span>
           <input id="input-workplace" class="popup__input-text popup__input-text_type_workplace" type="text"
-            name="workplace" value="" placeholder="Род занятий" minlength="2" maxlength="200" required>
+            name="about" value="" placeholder="Род занятий" minlength="2" maxlength="200" required>
           <span id='input-workplace-error' class="error">Вы пропустили это поле</span>
           <button class="popup__save-button" type="submit">Сохранить</button>
         </form>

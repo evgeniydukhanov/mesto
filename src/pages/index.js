@@ -59,6 +59,7 @@ const popupProfileClass = new PopupWithForm({
   }
 });
 
+
 const popupPlaceClass = new PopupWithForm({
   popupSelector: '.popup_type_place',
   handleFormSubmit: ({ placeName, placeLink }) => {
@@ -73,7 +74,8 @@ const cardList = new Section({
     return createCard(item)
   },
 },
-  ".elements");
+  ".elements")
+;
 
 const api = new Api({
   address: 'https://mesto.nomoreparties.co/v1/cohort-35/',
