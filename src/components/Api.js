@@ -23,5 +23,18 @@ export default class Api {
       }
     }).then(this._handleResponse)
   }
+  patchUserInfo({name, about}){
+    return fetch(`${this._address}/users/me`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name,
+        about,
+      })
+      .then(this._handleResponse)
+    });
+  }
 }
-

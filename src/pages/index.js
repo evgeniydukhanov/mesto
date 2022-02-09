@@ -1,5 +1,5 @@
 import './index.css';
-import { initialCards } from "../utils/constants.js";
+// import { initialCards } from "../utils/constants.js";
 import { config } from "../utils/constants.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -8,6 +8,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
+
 
 
 const editButton = document.querySelector(".profile__edit-button");
@@ -27,7 +28,7 @@ function openPopupPlace() {
 function openPopupProfile() {
   if (nameInput.value === "" && jobInput.value === "") {
     nameInput.value = userData.getUserInfo().name;
-    jobInput.value = userData.getUserInfo().workplace;
+    jobInput.value = userData.getUserInfo().about;
   }
 
   popupProfileClass.open();
@@ -52,8 +53,8 @@ const placeFormValidation = new FormValidator(config, placeForm);
 const profileFormValidation = new FormValidator(config, profileForm);
 const popupProfileClass = new PopupWithForm({
   popupSelector: '.popup_type_info',
-  handleFormSubmit: ({ name, workplace, avatar }) => {
-    userData.setUserInfo({ name, workplace, avatar });
+  handleFormSubmit: ({ name, about, avatar }) => {
+    userData.setUserInfo({ name, about, avatar });
     popupProfileClass.close();
   }
 });
@@ -87,10 +88,20 @@ popupProfileClass.setEventListeners();
 popupPlaceClass.setEventListeners();
 popupWithImage.setEventListeners();
 
-api.getCards()
-  .then(cards => {
+Promise.all([api.getUserInfo(), api.getCards()])
+  .then(([newUserData, cards]) => {
+    userData.setUserInfo(newUserData);
     cardList.renderItems(cards);
   })
-  .then(api.getUserInfo())
-  .catch(err => console.log(err))
+  .catch((err) =>
+    console.log(`${err}`)
+  );
 
+
+
+// api.getCards()
+//   .then(cards => {
+//     cardList.renderItems(cards);
+//   })
+//   .then(api.getUserInfo())
+//   .catch(err => console.log(err))

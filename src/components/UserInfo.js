@@ -11,14 +11,15 @@ export default class UserInfo {
   getUserInfo(){
     return {
       name: this._name.textContent,
-      workplace: this._workplace.textContent,
+      about: this._workplace.textContent,
       userId : this._userId
     };
   }
   //Содержит публичный метод setUserInfo, который принимает новые данные пользователя и добавляет их на страницу.
-  setUserInfo({name, workplace, _id}){
+  setUserInfo({name, about, avatar, _id}){
     this._name.textContent = name;
-    this._workplace.textContent = workplace;
+    this._workplace.textContent = about;
+    this._avatar.src = avatar;
     this._userId = _id;
   };
 }
