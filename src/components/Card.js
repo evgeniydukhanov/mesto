@@ -4,6 +4,7 @@ export default class Card {
     this._link = data.link;
     this._selector = selector;
     this._handleCardClick = handleCardClick;
+    this._likes = data.likes;
   }
   _getTemplate() {
     const cardElement = document
@@ -20,6 +21,7 @@ export default class Card {
     this._elemImg.src = this._link;
     this._elemImg.alt = this._name;
     this._element.querySelector(".element__title").textContent = this._name;
+    this._element.querySelector(".element__like_counter").textContent = this._likes.length;
     this._setEventListeners();
     return this._element;
   }
