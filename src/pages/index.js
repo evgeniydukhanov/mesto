@@ -1,5 +1,4 @@
 import './index.css';
-// import { initialCards } from "../utils/constants.js";
 import { config } from "../utils/constants.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -8,8 +7,6 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
-
-
 
 const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
@@ -55,15 +52,16 @@ const popupProfileClass = new PopupWithForm({
   popupSelector: '.popup_type_info',
   handleFormSubmit: ({ name, about, avatar }) => {
     userData.setUserInfo({ name, about, avatar });
+    api.patchUserInfo({ name, about });
     popupProfileClass.close();
   }
 });
-
 
 const popupPlaceClass = new PopupWithForm({
   popupSelector: '.popup_type_place',
   handleFormSubmit: ({ placeName, placeLink }) => {
     const newCard = createCard({ name: placeName, link: placeLink });
+    api.addCard({ name: placeName, link: placeLink });
     cardList.prependItem(newCard);
     popupPlaceClass.close();
   }
@@ -75,7 +73,7 @@ const cardList = new Section({
   },
 },
   ".elements")
-;
+  ;
 
 const api = new Api({
   address: 'https://mesto.nomoreparties.co/v1/cohort-35/',
@@ -99,11 +97,3 @@ Promise.all([api.getUserInfo(), api.getCards()])
     console.log(`${err}`)
   );
 
-
-
-// api.getCards()
-//   .then(cards => {
-//     cardList.renderItems(cards);
-//   })
-//   .then(api.getUserInfo())
-//   .catch(err => console.log(err))

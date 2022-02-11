@@ -23,7 +23,7 @@ export default class Api {
       }
     }).then(this._handleResponse)
   }
-  patchUserInfo({name, about}){
+  patchUserInfo({ name, about }) {
     return fetch(`${this._address}/users/me`, {
       method: 'PATCH',
       headers: {
@@ -31,10 +31,22 @@ export default class Api {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name,
-        about,
+        name: name,
+        about: about
       })
-      .then(this._handleResponse)
-    });
+    }).then(this._handleResponse)
+  }
+  addCard({ name, link }) {
+    return fetch(`${this._address}/cards`, {
+      method: 'POST',
+      headers: {
+        authorization: this._token,
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name,
+        link: link
+      })
+    }).then(this._handleResponse)
   }
 }
