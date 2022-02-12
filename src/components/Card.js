@@ -5,7 +5,6 @@ export default class Card {
     this._selector = selector;
     this._handleCardClick = handleCardClick;
     this._likes = data.likes || [];
-    this._id = id;
   }
   _getTemplate() {
     const cardElement = document
