@@ -7,6 +7,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
+import PopupDelete from '../components/PopupDelete.js';
 
 const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
@@ -16,6 +17,9 @@ const profileForm = popupProfile.querySelector(".popup__input");
 const nameInput = profileForm.querySelector(".popup__input-text_type_name");
 const jobInput = profileForm.querySelector(".popup__input-text_type_workplace");
 const placeForm = popupPlace.querySelector(".popup__input_place");
+
+const popupDelete = new PopupDelete(".popup_type_element");
+popupDelete.setEventListeners();
 
 function openPopupPlace() {
   popupPlaceClass.open();
@@ -37,6 +41,8 @@ addButton.addEventListener('click', openPopupPlace);
 function createCard(data) {
   const card = new Card(data, '#cardTemplate', handleCardClick);
   const cardElement = card.generateCard();
+  const trashIcon = cardElement.querySelector(".element__delete");
+  trashIcon.addEventListener('click', () => popupDelete.open());
   return cardElement;
 }
 

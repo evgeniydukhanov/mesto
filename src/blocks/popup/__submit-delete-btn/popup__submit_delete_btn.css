@@ -1,4 +1,4 @@
-.popup__submit-delete-button {
+.popup__submit-delete-btn {
   width: 358px;
   height: 50px;
   padding: 0;
@@ -15,12 +15,12 @@
   transition: opacity 0.3s ease;
 }
 
-.popup__submit-delete-button {
+.popup__submit-delete-btn {
   opacity: 0.8;
 }
 
 @media screen and (max-width:660px) {
-  .popup__submit-delete-button {
+  .popup__submit-delete-btn {
     margin: 45px 22px 25px;
     width: 238px;
     height: 46px;

@@ -49,4 +49,12 @@ export default class Api {
       })
     }).then(this._handleResponse)
   }
+  deleteCard(_id) {
+    return fetch(`${this._address}/cards/${_id}`,{
+      method: 'DELETE',
+      headers: {
+        authorization: this._token
+      }
+    }).then(this._handleResponse);
+  }
 }
