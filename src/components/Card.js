@@ -6,6 +6,7 @@ export default class Card {
     this._selector = selector;
     this._handleCardClick = handleCardClick;
     this._likes = data.likes || [];
+    this._ownerId = data.ownerId;
   }
   _getTemplate() {
     const cardElement = document
@@ -31,10 +32,6 @@ export default class Card {
     this._elemImg.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
     });
-
-    this._deleteBtn = this._element.querySelector(".element__delete");
-    // this._deleteBtn.addEventListener('click', this._handleDelete);
-
     this._cardLikeBtn = this._element.querySelector(".element__button");
     this._cardLikeBtn.addEventListener('click', this._handleLike);
   }

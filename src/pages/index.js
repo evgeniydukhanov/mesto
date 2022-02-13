@@ -42,12 +42,11 @@ function createCard(data) {
   const card = new Card(data, '#cardTemplate', handleCardClick);
   const cardElement = card.generateCard();
   const trashIcon = cardElement.querySelector(".element__delete");
-  if(card._owner && userData && card._owner._id === userData._userId) {
+  if (card._owner && card._owner._id === userData._userId) {
     trashIcon.addEventListener('click', () => popupDelete.open());
-  }else{
+  } else {
     trashIcon.style.display = 'none';
   }
-
   return cardElement;
 }
 
@@ -71,10 +70,12 @@ const popupProfileClass = new PopupWithForm({
 const popupPlaceClass = new PopupWithForm({
   popupSelector: '.popup_type_place',
   handleFormSubmit: ({ placeName, placeLink }) => {
-    const newCard = createCard({ name: placeName, link: placeLink });
-    api.addCard({ name: placeName, link: placeLink });
-    cardList.prependItem(newCard);
-    popupPlaceClass.close();
+    api.addCard({ name: placeName, link: placeLink })
+      .then(card => {
+        const newCard = createCard(card);
+        cardList.prependItem(newCard);
+        popupPlaceClass.close();
+      })
   }
 });
 
