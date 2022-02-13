@@ -42,7 +42,12 @@ function createCard(data) {
   const card = new Card(data, '#cardTemplate', handleCardClick);
   const cardElement = card.generateCard();
   const trashIcon = cardElement.querySelector(".element__delete");
-  trashIcon.addEventListener('click', () => popupDelete.open());
+  if(card._owner && userData && card._owner._id === userData._userId) {
+    trashIcon.addEventListener('click', () => popupDelete.open());
+  }else{
+    trashIcon.style.display = 'none';
+  }
+
   return cardElement;
 }
 
