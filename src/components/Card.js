@@ -1,12 +1,13 @@
 export default class Card {
-  constructor(data, selector, handleCardClick) {
+  constructor(data, selector, handleCardClick, userData) {
     this._name = data.name;
     this._link = data.link;
-    this._owner = data.owner;
+    // this._owner = data.owner;
+    // this._ownerId = data.ownerId;
     this._selector = selector;
     this._handleCardClick = handleCardClick;
     this._likes = data.likes || [];
-    this._ownerId = data.ownerId;
+    this._deletable = data.owner && data.owner._id === userData._userId;
   }
   _getTemplate() {
     const cardElement = document
@@ -24,8 +25,16 @@ export default class Card {
     this._elemImg.alt = this._name;
     this._element.querySelector(".element__title").textContent = this._name;
     this._element.querySelector(".element__like_counter").textContent = this._likes.length;
+    this.showDeleteBtn();
     this._setEventListeners();
     return this._element;
+  }
+  showDeleteBtn(){
+    const trashIcon = this._element.querySelector(".element__delete");
+    if (this._deletable) {
+      trashIcon.style.display = 'block';
+      trashIcon.addEventListener('click', () => popupDelete.open());
+    }
   }
 
   _setEventListeners() {

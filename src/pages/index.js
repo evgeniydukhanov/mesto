@@ -39,14 +39,9 @@ editButton.addEventListener('click', openPopupProfile);
 addButton.addEventListener('click', openPopupPlace);
 
 function createCard(data) {
-  const card = new Card(data, '#cardTemplate', handleCardClick);
+  const card = new Card(data, '#cardTemplate', handleCardClick, userData);
   const cardElement = card.generateCard();
-  const trashIcon = cardElement.querySelector(".element__delete");
-  if (card._owner && card._owner._id === userData._userId) {
-    trashIcon.addEventListener('click', () => popupDelete.open());
-  } else {
-    trashIcon.style.display = 'none';
-  }
+
   return cardElement;
 }
 
