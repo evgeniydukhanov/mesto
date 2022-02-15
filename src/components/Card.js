@@ -6,7 +6,7 @@ export default class Card {
     this._handleCardClick = handleCardClick;
     this._handleDeleteBtnClick = handleDeleteBtnClick;
     this._likes = data.likes || [];
-    this._id = data.id;
+    this._id = data._id;
     this._deletable = data.owner && data.owner._id === userData._userId;
     this._element = document
       .querySelector(this._selector)
@@ -36,7 +36,7 @@ export default class Card {
     });
     this._cardLikeBtn = this._element.querySelector(".element__button");
     this._cardLikeBtn.addEventListener('click', this._handleLike);
-    this._delBtn.addEventListener('click', this._handleDeleteBtnClick)
+    this._delBtn.addEventListener('click', () => {this._handleDeleteBtnClick(this)});
   }
   deleteCard = () => {
     this._element.remove();

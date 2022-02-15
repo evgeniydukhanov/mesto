@@ -46,7 +46,7 @@ function createCard(data) {
 }
 
 const popupDelete = new PopupWithConfirmation(".popup_type_element");
-function handleDeleteBtnClick() {
+function handleDeleteBtnClick(card) {
   popupDelete.open();
   popupDelete.setSubmitAction(() => {
     api.deleteCard(card.getId())
@@ -54,6 +54,7 @@ function handleDeleteBtnClick() {
         card.deleteCard();
       })
       .catch(err => console.log(`Карточка не удалилась ${err}`))
+      console.log(card.getId())
   })
 }
 
