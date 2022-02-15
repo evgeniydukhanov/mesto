@@ -9,6 +9,7 @@ import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 
+
 const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
 const popupProfile = document.querySelector(".popup_type_info");
@@ -38,11 +39,24 @@ editButton.addEventListener('click', openPopupProfile);
 addButton.addEventListener('click', openPopupPlace);
 
 function createCard(data) {
-  const card = new Card(data, '#cardTemplate', handleCardClick, userData);
+  const card = new Card(data, '#cardTemplate', handleCardClick, userData, handleDeleteBtnClick);
   const cardElement = card.generateCard();
 
   return cardElement;
 }
+
+const popupDelete = new PopupWithConfirmation(".popup_type_element");
+function handleDeleteBtnClick() {
+  popupDelete.open();
+  popupDelete.setSubmitAction(() => {
+    api.deleteCard(card.getId())
+      .then(() => {
+        card.deleteCard();
+      })
+      .catch(err => console.log(`Карточка не удалилась ${err}`))
+  })
+}
+
 
 function handleCardClick(name, link) {
   popupWithImage.open({ name, link });
@@ -78,8 +92,7 @@ const cardList = new Section({
     return createCard(item)
   },
 },
-  ".elements")
-  ;
+  ".elements");
 
 const api = new Api({
   address: 'https://mesto.nomoreparties.co/v1/cohort-35/',
@@ -87,9 +100,11 @@ const api = new Api({
 })
 
 
+
 placeFormValidation.enableValidation();
 profileFormValidation.enableValidation();
 
+popupDelete.setEventListeners();
 popupProfileClass.setEventListeners();
 popupPlaceClass.setEventListeners();
 popupWithImage.setEventListeners();
