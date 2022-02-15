@@ -7,7 +7,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
-import PopupDelete from '../components/PopupDelete.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 
 const editButton = document.querySelector(".profile__edit-button");
 const addButton = document.querySelector(".profile__add-button");
@@ -18,8 +18,7 @@ const nameInput = profileForm.querySelector(".popup__input-text_type_name");
 const jobInput = profileForm.querySelector(".popup__input-text_type_workplace");
 const placeForm = popupPlace.querySelector(".popup__input_place");
 
-const popupDelete = new PopupDelete(".popup_type_element");
-popupDelete.setEventListeners();
+
 
 function openPopupPlace() {
   popupPlaceClass.open();

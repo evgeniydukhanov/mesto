@@ -2,8 +2,6 @@ export default class Card {
   constructor(data, selector, handleCardClick, userData) {
     this._name = data.name;
     this._link = data.link;
-    // this._owner = data.owner;
-    // this._ownerId = data.ownerId;
     this._selector = selector;
     this._handleCardClick = handleCardClick;
     this._likes = data.likes || [];
@@ -33,7 +31,6 @@ export default class Card {
     const trashIcon = this._element.querySelector(".element__delete");
     if (this._deletable) {
       trashIcon.style.display = 'block';
-      trashIcon.addEventListener('click', () => popupDelete.open());
     }
   }
 
@@ -44,7 +41,7 @@ export default class Card {
     this._cardLikeBtn = this._element.querySelector(".element__button");
     this._cardLikeBtn.addEventListener('click', this._handleLike);
   }
-  _handleDelete = () => {
+  deleteCard = () => {
     this._element.remove();
   }
   _handleLike = () => {
