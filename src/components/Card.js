@@ -36,7 +36,7 @@ export default class Card {
     });
     this._cardLikeBtn = this._element.querySelector(".element__button");
     this._cardLikeBtn.addEventListener('click', this._handleLike);
-    this._delBtn.addEventListener('click', () => {this._handleDeleteBtnClick(this)});
+    this._delBtn.addEventListener('click', () => { this._handleDeleteBtnClick(this) });
   }
   deleteCard = () => {
     this._element.remove();
@@ -44,7 +44,7 @@ export default class Card {
   _handleLike = () => {
     this._cardLikeBtn.classList.toggle("element__button_active");
   }
-  getId(){
+  getId() {
     return this._id;
   }
 }

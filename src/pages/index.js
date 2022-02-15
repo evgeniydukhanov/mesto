@@ -54,7 +54,6 @@ function handleDeleteBtnClick(card) {
         card.deleteCard();
       })
       .catch(err => console.log(`Карточка не удалилась ${err}`))
-      console.log(card.getId())
   })
 }
 
