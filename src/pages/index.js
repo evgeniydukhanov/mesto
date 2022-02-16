@@ -39,7 +39,7 @@ editButton.addEventListener('click', openPopupProfile);
 addButton.addEventListener('click', openPopupPlace);
 
 function createCard(data) {
-  const card = new Card(data, '#cardTemplate', handleCardClick, userData, handleDeleteBtnClick);
+  const card = new Card(data, '#cardTemplate', handleCardClick, userData, handleDeleteBtnClick, handleLikeClick);
   const cardElement = card.generateCard();
 
   return cardElement;
@@ -57,6 +57,20 @@ function handleDeleteBtnClick(card) {
   })
 }
 
+function handleLikeClick(card) {
+  if (card.isLiked()) {
+    api.deleteLike(card.getId())
+      .then((newLikes) => {
+        card.likeAmount(newLikes);
+        console.log('hey')
+      })
+  } else {
+    api.putLike(card.getId())
+      .then((newLikes) => {
+        card.likeAmount(newLikes);
+      })
+  }
+}
 
 function handleCardClick(name, link) {
   popupWithImage.open({ name, link });

@@ -58,4 +58,32 @@ export default class Api {
     })
       .then(this._handleResponse)
   }
+  patchAvatar(avatar) {
+    return fetch(`${this._address}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        avatar: avatar,
+      })
+    }).then(this._handleResponse)
+  }
+  putLike(id) {
+    return fetch(`${this._address}/cards/${id}/likes`, {
+      method: "PUT",
+      headers: {
+        authorization: this._token
+      },
+    }).then(this._handleResponse);
+  }
+  deleteLike(id) {
+    return fetch(`${this._address}/cards/${id}/likes`, {
+      method: "DELETE",
+      headers: {
+        authorization: this._token
+      },
+    }).then(this._handleResponse);
+  }
 }
