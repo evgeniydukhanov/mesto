@@ -25,6 +25,10 @@ export default class Card {
     this._element.querySelector(".element__like_counter").textContent = this._likes.length;
     this.showDeleteBtn();
     this._setEventListeners();
+    if(this._isLiked) {
+      this._cardLikeBtn.classList.add("element__button_active");
+     }
+     console.log(this._isLiked);
     return this._element;
   }
   showDeleteBtn() {
