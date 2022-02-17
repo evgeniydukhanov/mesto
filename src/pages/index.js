@@ -15,9 +15,12 @@ const addButton = document.querySelector(".profile__add-button");
 const popupProfile = document.querySelector(".popup_type_info");
 const popupPlace = document.querySelector(".popup_type_place");
 const profileForm = popupProfile.querySelector(".popup__input");
+const popupAvatar = document.querySelector(".popup_type_avatar");
+const avatarForm = popupAvatar.querySelector(".popup__input");
 const nameInput = profileForm.querySelector(".popup__input-text_type_name");
 const jobInput = profileForm.querySelector(".popup__input-text_type_workplace");
 const placeForm = popupPlace.querySelector(".popup__input_place");
+const avatarBtn = document.querySelector(".profile__avatar");
 
 
 
@@ -62,41 +65,82 @@ function handleLikeClick(card) {
     api.deleteLike(card.getId())
       .then((newLikes) => {
         card.likeAmount(newLikes);
-        console.log('hey')
       })
+      .catch((err) =>
+        console.log(`${err}`)
+      );
   } else {
     api.putLike(card.getId())
       .then((newLikes) => {
         card.likeAmount(newLikes);
       })
+      .catch((err) =>
+        console.log(`${err}`)
+      );
   }
 }
 
 function handleCardClick(name, link) {
   popupWithImage.open({ name, link });
 }
+avatarBtn.addEventListener("click", () => {
+  popupAvatarClass.open();
+  avatarFormValidation.setButtonDisabled();
+})
 
 const popupWithImage = new PopupWithImage(".popup_type_pic");
 const userData = new UserInfo({ nameSelector: ".profile__name", workplaceSelector: ".profile__workplace", avatarSelector: ".profile__avatar" })
 const placeFormValidation = new FormValidator(config, placeForm);
 const profileFormValidation = new FormValidator(config, profileForm);
-const popupProfileClass = new PopupWithForm({
-  popupSelector: '.popup_type_info',
-  handleFormSubmit: ({ name, about, avatar }) => {
-    userData.setUserInfo({ name, about, avatar });
-    api.patchUserInfo({ name, about });
-    popupProfileClass.close();
+const avatarFormValidation = new FormValidator(config, avatarForm)
+const popupAvatarClass = new PopupWithForm({
+  popupSelector: '.popup_type_avatar',
+  handleFormSubmit: ({ avatar }) => {
+    popupAvatarClass.showLoading(true);
+    api.patchAvatar(avatar)
+      .then((data) => {
+        userData.setUserInfo(data);
+        popupAvatarClass.close();
+      })
+      .catch((err) =>
+        console.log(`${err}`)
+      )
+      .finally(() => {
+        popupAvatarClass.showLoading(false, 'Сохранить')
+      })
   }
 });
-
+const popupProfileClass = new PopupWithForm({
+  popupSelector: '.popup_type_info',
+  handleFormSubmit: ({ name, about }) => {
+    popupProfileClass.showLoading(true);
+    api.patchUserInfo({ name, about })
+      .then((data) => {
+        userData.setUserInfo(data);
+        popupProfileClass.close();
+      })
+      .catch((err) =>
+        console.log(`${err}`)
+      )
+      .finally(() => {
+        popupProfileClass.showLoading(false, 'Сохранить')
+      })
+  }
+});
 const popupPlaceClass = new PopupWithForm({
   popupSelector: '.popup_type_place',
   handleFormSubmit: ({ placeName, placeLink }) => {
+    popupPlaceClass.showLoading(true);
     api.addCard({ name: placeName, link: placeLink })
       .then(card => {
         const newCard = createCard(card);
         cardList.prependItem(newCard);
         popupPlaceClass.close();
+      })
+      .catch((err) =>
+        console.log(`${err}`))
+      .finally(() => {
+        popupProfileClass.showLoading(false, 'Cоздать')
       })
   }
 });
@@ -115,6 +159,7 @@ const api = new Api({
 
 
 
+avatarFormValidation.enableValidation();
 placeFormValidation.enableValidation();
 profileFormValidation.enableValidation();
 
@@ -122,6 +167,7 @@ popupDelete.setEventListeners();
 popupProfileClass.setEventListeners();
 popupPlaceClass.setEventListeners();
 popupWithImage.setEventListeners();
+popupAvatarClass.setEventListeners();
 
 Promise.all([api.getUserInfo(), api.getCards()])
   .then(([newUserData, cards]) => {
