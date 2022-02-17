@@ -79,8 +79,21 @@
         <button class="popup__close-button" type="button"></button>
         <p class="popup__heading">Вы уверены?</p>
         <form class ="delete__form">
-        <button class="popup__submit-delete-btn" type="submit">Да</button>
+        <button class="popup__save-button" type="submit">Да</button>
       </form>
+      </div>
+    </div>
+    <div class="popup popup_type_avatar">
+      <div class="popup__overlay"></div>
+      <div class="popup__container">
+        <button class="popup__close-button" type="button"></button>
+        <p class="popup__heading">Обновить аватар</p>
+        <form class="popup__input popup__input_place" name="placeInput">
+          <input id="avatar-link" class="popup__input-text popup__input-text_type_avatarLink" type="url" name="avatar"
+            value="" placeholder="Ссылка на изображение" required>
+          <span id='avatar-link-error' class="error">Введите адрес сайта</span>
+          <button class="popup__save-button popup__add-button" type="submit">Сохранить</button>
+        </form>
       </div>
     </div>
     <template id="cardTemplate" class="template__card">

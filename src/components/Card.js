@@ -28,7 +28,6 @@ export default class Card {
     if(this._isLiked) {
       this._cardLikeBtn.classList.add("element__button_active");
      }
-     console.log(this._isLiked);
     return this._element;
   }
   showDeleteBtn() {
