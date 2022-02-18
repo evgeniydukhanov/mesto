@@ -55,6 +55,7 @@ function handleDeleteBtnClick(card) {
     api.deleteCard(card.getId())
       .then(() => {
         card.deleteCard();
+        popupDelete.close();
       })
       .catch(err => console.log(`Карточка не удалилась ${err}`))
   })
