@@ -24,7 +24,7 @@ export default class PopupWithForm extends Popup {
     this._form.addEventListener('submit', this._handleSubmit);
   }
   showLoading(isLoading, buttonText = "Сохранение") {
-    this._submitBtn.disavble = isLoading;
+    this._submitBtn.disable = isLoading;
     this._submitBtn.textContent = buttonText
   }
   close() {
